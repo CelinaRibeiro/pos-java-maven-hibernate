@@ -12,11 +12,12 @@
 <h:body>
 
 	<h:form>
+		
 		<h:panelGrid columns="2">
 			<f:facet name="header">Cadastro de Usuários</f:facet>
 
 			<h:outputLabel value="Id: " />
-			<h:inputText value="#{usuarioPessoaManagedBean.usuarioPessoa.id}"
+			<h:inputText value="#{usuarioPessoaManagedBean.usuarioPessoa.id}" 
 				readonly="true" />
 
 			<h:outputLabel value="Nome: " />
@@ -51,8 +52,7 @@
 		<br />
 		<h:dataTable value="#{usuarioPessoaManagedBean.list}" var="user"
 			cellpadding="10" border="1">
-			<f:facet name="header">Lista de Usuários</f:facet>
-
+			
 			<h:column style="width:150px;">
 				<f:facet name="header">Id</f:facet>
 				<h:outputText value="#{user.id}" />
