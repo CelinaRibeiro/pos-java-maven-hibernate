@@ -2,7 +2,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core">
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
@@ -12,19 +13,29 @@
 <h:body>
 
 	<h:form>
-		
-		<h:panelGrid columns="2">
-			<f:facet name="header">Cadastro de Usuários</f:facet>
+		<p:breadCrumb>
+			<p:menuitem />
+			<p:menuitem value="Página JSF" action="index.jsf" />
+			<p:menuitem value="Página PrimeFaces" action="primefaces.jsf" />
+		</p:breadCrumb>
+	</h:form>
 
+	<h:form>
+		<h:messages showDetail="true" showSummary="false" />
+
+		<h:panelGrid columns="2">
 			<h:outputLabel value="Id: " />
-			<h:inputText value="#{usuarioPessoaManagedBean.usuarioPessoa.id}" 
+			<h:inputText value="#{usuarioPessoaManagedBean.usuarioPessoa.id}"
 				readonly="true" />
 
 			<h:outputLabel value="Nome: " />
-			<h:inputText value="#{usuarioPessoaManagedBean.usuarioPessoa.nome}" />
+			<h:inputText value="#{usuarioPessoaManagedBean.usuarioPessoa.nome}"
+				required="true" requiredMessage="Informe o nome!" />
 
 			<h:outputLabel value="Sobrenome: " />
-			<h:inputText value="#{usuarioPessoaManagedBean.usuarioPessoa.sobrenome}" />
+			<h:inputText
+				value="#{usuarioPessoaManagedBean.usuarioPessoa.sobrenome}"
+				required="true" requiredMessage="Informe o sobrenome! " />
 
 			<h:outputLabel value="Email: " />
 			<h:inputText value="#{usuarioPessoaManagedBean.usuarioPessoa.email}" />
@@ -32,27 +43,37 @@
 			<h:outputLabel value="Idade: " />
 			<h:inputText value="#{usuarioPessoaManagedBean.usuarioPessoa.idade}" />
 
+			<h:outputLabel value="Sexo: " />
+			<h:selectOneMenu
+				value="#{usuarioPessoaManagedBean.usuarioPessoa.sexo}">
+				<f:selectItem itemValue="MASCULINO" />
+				<f:selectItem itemValue="FEMININO" />
+			</h:selectOneMenu>
+
 			<h:outputLabel value="Login: " />
 			<h:inputText value="#{usuarioPessoaManagedBean.usuarioPessoa.login}" />
 
 			<h:outputLabel value="Senha: " />
-			<h:inputSecret value="#{usuarioPessoaManagedBean.usuarioPessoa.senha}" />
+			<h:inputSecret
+				value="#{usuarioPessoaManagedBean.usuarioPessoa.senha}" />
 
-			<h:outputLabel />
-
+			
 			<h:panelGroup>
 				<h:commandButton value="Salvar"
 					action="#{usuarioPessoaManagedBean.salvar}" />
 				<h:commandButton value="Novo"
 					action="#{usuarioPessoaManagedBean.novo}" />
-				<h:commandButton value="Excluir" action="#{usuarioPessoaManagedBean.remover}"/>
+				<h:commandButton value="Excluir"
+					action="#{usuarioPessoaManagedBean.remover}" />
 			</h:panelGroup>
 		</h:panelGrid>
 
 		<br />
 		<h:dataTable value="#{usuarioPessoaManagedBean.list}" var="user"
 			cellpadding="10" border="1">
-			
+
+			<f:facet name="Lista de Usuários"></f:facet>
+
 			<h:column style="width:150px;">
 				<f:facet name="header">Id</f:facet>
 				<h:outputText value="#{user.id}" />
