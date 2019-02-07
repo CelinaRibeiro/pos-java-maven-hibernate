@@ -42,10 +42,9 @@ public class DaoGeneric<E> {
 		return e;
 	}
 
-	public void deletarPorId(E entidade) {
+	public void deletarPorId(E entidade) throws Exception{
 
 		Object id = HibernateUtil.getPrimarykey(entidade);
-
 		EntityTransaction transaction = entityManager.getTransaction();
 		transaction.begin();
 
