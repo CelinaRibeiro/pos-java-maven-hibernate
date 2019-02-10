@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<title>Telefone</title>
+</h:head>
+
+<h:body>
+
+	<h:form>
+		<p:breadCrumb>
+			<p:menuitem />
+			<p:menuitem value="Página JSF" action="index.jsf" />
+			<p:menuitem value="Página Primefaces" action="primefaces.xhtml" />
+		</p:breadCrumb>
+	</h:form>
+
+	<h:form id="formulario">
+		<h:message showDetail="true" showSummary="false" id="msg" />
+
+		<h:panelGrid columns="2">
+			<h:outputLabel value="Nome: " />
+			<h:outputText value="#{telefoneManagedBean.user.nome}" />
+
+			<h:outputLabel value="Número: " />
+			<h:inputText value="#{telefoneManagedBean.telefone.numero}" />
+
+			<h:outputLabel value="Tipo: " />
+			<h:inputText value="#{telefoneManagedBean.telefone.tipo}" />
+		</h:panelGrid>
+		
+		<br/>
+		<h:commandButton value="Salvar" action="#{telefoneManagedBean.salvar}"/>
+		
+	</h:form>
+
+</h:body>
+</html>

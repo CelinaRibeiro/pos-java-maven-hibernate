@@ -9,7 +9,7 @@
 	<!-- anotação das classes -->
 	<class>model.UsuarioPessoa</class>
 	<class>model.TelefoneUser</class>
-	
+		
 	<properties>
 	<!-- Dados de conexão com banco -->
 	<property name="hibernate.connection.driver_class" value="org.postgresql.Driver"/>
