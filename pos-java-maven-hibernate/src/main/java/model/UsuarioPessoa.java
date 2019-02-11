@@ -29,12 +29,21 @@ public class UsuarioPessoa {
 	private String senha;
 	private String sexo;
 	private int idade;
+	private Double salario;
 
 	@OneToMany(mappedBy = "usuarioPessoa")
 	private List<TelefoneUser> telefoneUsers;
 
 	public List<TelefoneUser> getTelefoneUsers() {
 		return telefoneUsers;
+	}
+
+	public Double getSalario() {
+		return salario;
+	}
+
+	public void setSalario(Double salario) {
+		this.salario = salario;
 	}
 
 	public void setTelefoneUsers(List<TelefoneUser> telefoneUsers) {

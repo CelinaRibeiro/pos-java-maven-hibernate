@@ -32,11 +32,48 @@
 
 			<h:outputLabel value="Tipo: " />
 			<h:inputText value="#{telefoneManagedBean.telefone.tipo}" />
+			
+			<h:commandButton value="Salvar" action="#{telefoneManagedBean.salvar}" id="botaonovo">
+				<f:ajax execute="@this" render="@form"/>
+			</h:commandButton>
+					
 		</h:panelGrid>
-		
-		<br/>
-		<h:commandButton value="Salvar" action="#{telefoneManagedBean.salvar}"/>
-		
+	</h:form>
+
+	<h:form id="formTelefones">
+		<h:dataTable value="#{telefoneManagedBean.user.telefoneUsers}"
+			var="fone" cellpadding="15" border="1" id="tabelFone">
+
+			<f:facet name="header">Lista de telefones</f:facet>
+
+			<h:column style="width:150px;">
+				<f:facet name="header">Id</f:facet>
+				<h:outputText value="#{fone.id}" />
+			</h:column>
+
+			<h:column>
+				<f:facet name="header">Número</f:facet>
+				<h:outputText value="#{fone.numero}" />
+			</h:column>
+
+			<h:column>
+				<f:facet name="header">Tipo</f:facet>
+				<h:outputText value="#{fone.tipo}" />
+			</h:column>
+
+			<h:column>
+				<f:facet name="header">Delete</f:facet>
+				<h:commandLink immediate="true"
+					action="#{telefoneManagedBean.removeTelefone}" id="botaoremover">
+					<h:graphicImage url="resources/img/delete.jpg" width="25"
+						height="25" />
+					<f:setPropertyActionListener value="#{fone}"
+						target="#{telefoneManagedBean.telefone}" />
+					<f:ajax execute="botaoremover" render="@form" />
+				</h:commandLink>
+			</h:column>
+
+		</h:dataTable>
 	</h:form>
 
 </h:body>

@@ -6,11 +6,11 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-	<title>Insert title here</title>
+	<title>Cadastro Usuário em Primefaces</title>
 </h:head>
 
 <h:body>
+
 	<h:form>
 		<p:breadCrumb>
 			<p:menuitem />
@@ -19,37 +19,117 @@
 		</p:breadCrumb>
 	</h:form>
 
-	<h:form>
+	<h:form id="formulario">
+		<p:messages autoUpdate="true" showDetail="true" />
+		<br />
 		<br />
 		<p:panelGrid columns="2">
-			<p:outputLabel value="ID: " />
-			<p:inputText value="#{usuarioPessoaManagedBean.usuarioPessoa.id}"
-				readonly="true" />
 
-			<p:outputLabel value="Nome: " />
-			<p:inputText value="#{usuarioPessoaManagedBean.usuarioPessoa.nome}" />
+			<p:outputLabel>ID:</p:outputLabel>
+			<p:inputText readonly="true"
+				value="#{usuarioPessoaManagedBean.usuarioPessoa.id}" />
 
-			<p:outputLabel value="Sobrenome: " />
+			<p:outputLabel>Nome:</p:outputLabel>
+			<p:inputText value="#{usuarioPessoaManagedBean.usuarioPessoa.nome}"
+				required="true" requiredMessage="Informe o nome!" />
+
+			<p:outputLabel>Sobrenome:</p:outputLabel>
 			<p:inputText
-				value="#{usuarioPessoaManagedBean.usuarioPessoa.sobrenome}" />
+				value="#{usuarioPessoaManagedBean.usuarioPessoa.sobrenome}"
+				required="true" requiredMessage="Informe o sobrenome!" />
 
-			<p:outputLabel value="Email: " />
+			<p:outputLabel>Email:</p:outputLabel>
 			<p:inputText value="#{usuarioPessoaManagedBean.usuarioPessoa.email}" />
 
-			<p:outputLabel value="Idade: " />
+			<p:outputLabel>Idade:</p:outputLabel>
 			<p:inputText value="#{usuarioPessoaManagedBean.usuarioPessoa.idade}" />
+			
+			<p:outputLabel>Salário:</p:outputLabel>
+			<p:inputText value="#{usuarioPessoaManagedBean.usuarioPessoa.salario}"/>
 
-			<p:outputLabel value="Login: " />
+			<p:outputLabel>Sexo:</p:outputLabel>
+			<p:selectOneMenu
+				value="#{usuarioPessoaManagedBean.usuarioPessoa.sexo}">
+				<f:selectItem itemLabel="Feminino" itemValue="FEMININO" />
+				<f:selectItem itemLabel="Masculino" itemValue="MASCULINO" />
+			</p:selectOneMenu>
+
+			<p:outputLabel>Login:</p:outputLabel>
 			<p:inputText value="#{usuarioPessoaManagedBean.usuarioPessoa.login}" />
 
-			<p:outputLabel value="Senha: " />
+			<p:outputLabel>Senha:</p:outputLabel>
 			<p:password value="#{usuarioPessoaManagedBean.usuarioPessoa.senha}" />
 
 		</p:panelGrid>
-		
-		<p:commandButton value="Salvar" />
-		
+
+		<br />
+
+		<p:commandButton value="Salvar" ajax="false"
+			action="#{usuarioPessoaManagedBean.salvar}" />
+
+		<p:commandButton value="Novo" immediate="true"
+			action="#{usuarioPessoaManagedBean.novo}">
+			<f:ajax execute="@this" render="@form" />
+		</p:commandButton>
 	</h:form>
+
+	<br />
+
+	<h:form id="formtable">
+		<p:dataTable value="#{usuarioPessoaManagedBean.list}" var="user"
+			reflow="true" rows="5" paginator="true">
+
+			<p:column headerText="ID">
+				<h:outputText value="#{user.id}" />
+			</p:column>
+
+			<p:column headerText="Nome">
+				<h:outputText value="#{user.nome}" />
+			</p:column>
+
+			<p:column headerText="Sobrenome">
+				<h:outputText value="#{user.sobrenome}" />
+			</p:column>
+
+			<p:column headerText="Idade">
+				<h:outputText value="#{user.idade}" />
+			</p:column>
+
+			<p:column headerText="Login">
+				<h:outputText value="#{user.login}" />
+			</p:column>
+
+			<p:column headerText="Editar">
+				<h:commandLink immediate="true" id="botaoeditar">
+					<h:graphicImage url="resources/img/editar.png" width="25"
+						height="25" />
+					<f:setPropertyActionListener value="#{user}"
+						target="#{usuarioPessoaManagedBean.usuarioPessoa}" />
+					<f:ajax execute="botaoeditar" render=":formulario" />
+				</h:commandLink>
+			</p:column>
+
+			<p:column headerText="Excluir">
+				<h:commandLink id="botaoremover"
+					action="#{usuarioPessoaManagedBean.remover}">
+					<h:graphicImage url="resources/img/delete.jpg" width="25" height="25"/>
+					<f:setPropertyActionListener value="#{user}"
+						target="#{usuarioPessoaManagedBean.usuarioPessoa}" />
+					<f:ajax execute="botaoremover" render="@form" />
+				</h:commandLink>
+			</p:column>
+			
+			<p:column headerText="Telefones">
+				<h:commandLink immediate="true" action="telefoneprimefaces.jsf">
+					<h:graphicImage url="resources/img/phone.png" width="25" height="25"/>
+					<f:param name="codigouser" value="#{user.id}"/>
+				</h:commandLink>
+			</p:column>
+		</p:dataTable>
+	</h:form>
+	
+	<!-- Gráfico -->
+	<p:chart type="bar" model="#{usuarioPessoaManagedBean.barChartModel}"/>
 
 </h:body>
 

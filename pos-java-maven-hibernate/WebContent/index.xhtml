@@ -42,6 +42,9 @@
 
 			<h:outputLabel value="Idade: " />
 			<h:inputText value="#{usuarioPessoaManagedBean.usuarioPessoa.idade}" />
+			
+			<h:outputLabel value="Salário: "/>
+			<h:inputText value="#{usuarioPessoaManagedBean.usuarioPessoa.salario}"/>
 
 			<h:outputLabel value="Sexo: " />
 			<h:selectOneMenu
@@ -57,7 +60,6 @@
 			<h:inputSecret
 				value="#{usuarioPessoaManagedBean.usuarioPessoa.senha}" />
 
-
 			<h:panelGroup>
 				<h:commandButton value="Salvar"
 					action="#{usuarioPessoaManagedBean.salvar}" />
@@ -66,8 +68,10 @@
 				<h:commandButton value="Excluir"
 					action="#{usuarioPessoaManagedBean.remover}" />
 			</h:panelGroup>
+			
 		</h:panelGrid>
 		<br />
+		
 	</h:form>
 
 	<h:form id="formTable">

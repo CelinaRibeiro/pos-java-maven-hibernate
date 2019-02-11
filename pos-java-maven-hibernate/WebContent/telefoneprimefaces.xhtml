@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head></h:head>
+
+<h:body>
+	<h:form>
+		<p:breadCrumb>
+			<p:menuitem value="Página JSF" action="index.jsf" />
+			<p:menuitem value="Página PrimeFaces" action="primefaces.jsf" />
+		</p:breadCrumb>
+	</h:form>
+
+	<br />
+
+	<h:form id="formulario">
+		<p:messages showDetail="true" showSummary="false" id="msg" />
+		<p:panelGrid columns="2">
+
+			<p:outputLabel>Nome:</p:outputLabel>
+			<h:outputText value="#{telefoneManagedBean.user.nome}"
+				readonly="true" />
+
+			<p:outputLabel>Número:</p:outputLabel>
+			<p:inputText value="#{telefoneManagedBean.telefone.numero}"
+				required="true" requiredMessage="Número obrigatório!" />
+
+			<p:outputLabel>Tipo:</p:outputLabel>
+			<p:inputText value="#{telefoneManagedBean.telefone.tipo}"
+				required="true" requiredMessage="Tipo obrigatório!" />
+									
+		</p:panelGrid>
+				
+		<p:commandButton value="Salvar"
+				action="#{telefoneManagedBean.salvar}" ajax="false" />
+		
+	</h:form>
+
+	<h:form id="formTelefones">
+		<p:dataTable value="#{telefoneManagedBean.user.telefoneUsers}"
+			var="fone" id="tabelFone">
+
+			<p:column headerText="ID">
+				<h:outputText value="#{fone.id}" />
+			</p:column>
+
+			<p:column headerText="Número">
+				<h:outputText value="#{fone.numero}" />
+			</p:column>
+
+			<p:column headerText="Tipo">
+				<h:outputText value="#{fone.tipo}" />
+			</p:column>
+				
+			<p:column headerText="Excluir">
+				<p:commandLink immediate="true" id="botaoremover" action="#{telefoneManagedBean.removeTelefone}">
+				<h:graphicImage url="resources/img/delete.jpg" width="25" height="25"/>
+				<f:setPropertyActionListener value="#{fone}" target="#{telefoneManagedBean.telefone}"/>
+				<f:ajax execute="botaoremover" render="@form :formulario:msg" />
+				</p:commandLink>
+			</p:column>
+
+
+		</p:dataTable>
+
+	</h:form>
+
+</h:body>
+</html>
